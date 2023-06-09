@@ -8,11 +8,12 @@ runtime! syntax/ctrlh.vim
 syntax case ignore
 syntax match manReference       '\<\zs\(\f\|:\)\+(\([nlpo]\|\d[a-z]*\)\?)\ze\(\W\|$\)'
 syntax match manTitle           '^\(\f\|:\)\+([0-9nlpo][a-z]*).*'
-syntax match manSectionHeading  '^[a-z][a-z0-9& ,.-]*[a-z]$'
+syntax match manSectionHeading  '\v^([A-Z].+)'
 syntax match manHeaderFile      '\s\zs<\f\+\.h>\ze\(\W\|$\)'
 syntax match manURL             `\v<(((https?|ftp|gopher)://|(mailto|file|news):)[^' 	<>"]+|(www|web|w3)[a-z0-9_-]*\.[a-z0-9._-]+\.[^' 	<>"]+)[a-zA-Z0-9/]`
 syntax match manEmail           '<\?[a-zA-Z0-9_.+-]\+@[a-zA-Z0-9-]\+\.[a-zA-Z0-9-.]\+>\?'
 syntax match manHighlight       +`.\{-}''\?+
+syntax match manOption          '\v^\s+(\-[^ \[,=]+)'
 
 " below syntax elements valid for manpages 2 & 3 only
 if getline(1) =~ '^\(\f\|:\)\+([23][px]\?)'
@@ -33,6 +34,7 @@ syntax region manFiles     start='^ENVIRONMENT'hs=s+11 end='^\u[A-Z ]*$'me=e-30 
 
 hi def link manTitle           Title
 hi def link manSectionHeading  Statement
+hi def link manOption          Constant
 hi def link manOptionDesc      Constant
 hi def link manLongOptionDesc  Constant
 hi def link manReference       PreProc
